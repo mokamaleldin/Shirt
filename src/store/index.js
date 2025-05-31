@@ -5,8 +5,9 @@ const state = proxy({
   color: '#EFBD48',
   isLogoTexture: false,
   isFullTexture: false,
-  logoDecal: './threejs.png',
-  fullDecal: './threejs.png',
+  logoDecal: '/threejs.png',
+  fullDecal: '/threejs.png',
+  isNewUpload: false, // Track if this is a newly uploaded texture
 });
 
 export default state;

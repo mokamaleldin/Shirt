@@ -13,7 +13,10 @@ export const downloadCanvasToImage = () => {
 export const reader = (file) =>
   new Promise((resolve, reject) => {
     const fileReader = new FileReader();
-    fileReader.onload = () => resolve(fileReader.result);
+    fileReader.onload = () => {
+      // Return the result with a metadata flag to indicate this is a newly uploaded texture
+      resolve({ dataURL: fileReader.result, isNewUpload: true });
+    };
     fileReader.readAsDataURL(file);
   });
 

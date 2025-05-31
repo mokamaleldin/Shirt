@@ -67,10 +67,12 @@ const Customizer = () => {
     }
   }
 
-  const handleDecals = (type, result) => {
+  const handleDecals = (type, result, isNewUpload = false) => {
     const decalType = DecalTypes[type];
-
+    
+    // Store both the texture URL and the upload flag in the state
     state[decalType.stateProperty] = result;
+    state.isNewUpload = isNewUpload; // Track that this is a new upload
 
     if(!activeFilterTab[decalType.filterTab]) {
       handleActiveFilterTab(decalType.filterTab)
@@ -104,7 +106,10 @@ const Customizer = () => {
   const readFile = (type) => {
     reader(file)
       .then((result) => {
-        handleDecals(type, result);
+        // Extract the dataURL from the result object
+        const { dataURL, isNewUpload } = result;
+        // Pass the dataURL and metadata to handleDecals
+        handleDecals(type, dataURL, isNewUpload);
         setActiveEditorTab("");
       })
   }
